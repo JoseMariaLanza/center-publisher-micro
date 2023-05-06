@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  publisherapp:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: center-publisher-docker
+    container_name: publisherapp
+    restart: always # reiniciar el contenedor si se detiene
+    ports:
+      - "${PORT}:${PORT}"
+    # working_dir: /var/www/center-publisher-micro
+    environment:
+      MONGODB: ${MONGODB}
+      PORT: ${PORT}
+      # DEFAULT_LIMIT: ${DEFAULT_LIMIT} Not defined in my .env file
+    # volumes:
+    #   - ./:/var/www/center-publisher-micro
+
+  db:
+    image: mongo:5
+    container_name: mongo-publisher
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGODB_DATABASE: center_publisher
+    volumes:
+      - ./mongo:/data/db

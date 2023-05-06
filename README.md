@@ -37,6 +37,31 @@ yarn start:dev
 http://localhost:3000/api/v1/seed
 ```
 
+#Notes
+Heroku redeploy without changes
+```
+git commit --allow-empty -m "Trigger Heroku deploy"
+git push heroku <master|main>
+```
+
+#RUN DOCKERIZED APP IN PRODUCTION
+## Steps
+1. Create __.env.prod__ file
+2. Set environment variables
+3. Build add __-d__ for run image detached
+
+## Build
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+
+## Run
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up
+
+## Nota
+Por defecto, __docker-compose__ usa el archivo ```.env```, por lo que si tienen el archivo .env y lo configuran con sus variables de entorno de producción, bastaría con
+```
+docker-compose -f docker-compose.prod.yaml up --build
+```
+
 ## Stack in this project
 * MongoDB
 * Nest
