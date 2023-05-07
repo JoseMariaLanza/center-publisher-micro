@@ -35,6 +35,12 @@ yarn start:dev
 8. Insert seeds
 ```
 http://localhost:3000/api/v1/seed
+
+#Notes
+Heroku redeploy without changes
+```
+git commit --allow-empty -m "Trigger Heroku deploy"
+git push heroku <master|main>
 ```
 
 #Notes
